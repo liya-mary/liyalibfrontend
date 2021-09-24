@@ -1,0 +1,44 @@
+
+<div class='card'>
+    <div class='card-header'>
+     {{pageTitle}}
+    </div>
+    
+    <div class='card-body'>            
+      <div class='table-responsive'>
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>
+                <button class='btn btn-primary'
+                (click)='toggleImage()'>
+                  {{showImage? 'Hide' : 'Show'}} Image
+                </button>
+              </th>
+              <th>Book Title</th>
+              <th>Book Author</th>
+              <th>Genre</th>
+            </tr>
+           
+          </thead>
+          <tbody>  
+              <tr *ngFor='let book of books'>
+                  <td><img *ngIf='showImage'
+                    [src] = 'book.Image' 
+                    [title] = 'book.Title'
+                    [style.width.px] = 'imageWidth' 
+                    [style.margin.px] = 'imageMargin'></td>
+                  <td>{{ book.Title }}</td>
+                  <td>{{ book.Author }}</td>
+                  <td>{{ book.Genre }}</td>
+                  <td>
+                    <button class="btn btn-warning" style="cursor:pointer" *ngIf="_auth.loggedIn() && (role=='admin')"  (click)="editProduct(book)" style="margin-left: 20px;"> Edit</button>
+                    <button class="btn btn-danger" style="cursor:pointer" *ngIf="_auth.loggedIn() && (role=='admin')"   (click)="deleteProduct(book)"> Delete</button>
+                  </td>
+                </tr>              
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

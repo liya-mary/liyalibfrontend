@@ -1,0 +1,44 @@
+
+<div class='card'>
+    <div class='card-header'>
+     {{pageTitle}}
+    </div>
+    
+    <div class='card-body'>            
+      <div class='table-responsive'>
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>
+                <button class='btn btn-primary'
+                (click)='toggleImage()'>
+                  {{showImage? 'Hide' : 'Show'}} Image
+                </button>
+              </th>
+              <th>Author Name</th>
+              <th>Period</th>
+              <th>Notable Works</th>
+            </tr>
+           
+          </thead>
+          <tbody>  
+              <tr *ngFor='let author of authors'>
+                  <td><img *ngIf='showImage'
+                    [src] = 'author.authorimg' 
+                    [title] = 'author.authorname'
+                    [style.width.px] = 'imageWidth' 
+                    [style.margin.px] = 'imageMargin'></td>
+                  <td>{{ author.authorname }}</td>
+                  <td>{{ author.period}}</td>
+                  <td>{{ author.works}}</td>
+                  <td>
+                    <button class="btn btn-warning" style="cursor:pointer" *ngIf="_auth.loggedIn()"  (click)="editProduct(author)" style="margin-left: 20px;"> Edit</button>
+                    <button class="btn btn-danger" style="cursor:pointer" *ngIf="_auth.loggedIn()"  (click)="deleteProduct(author)"> Delete</button>
+                  </td>
+                </tr>              
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
